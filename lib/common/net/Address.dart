@@ -2,7 +2,7 @@ import 'package:gsy_github_app_flutter/common/config/Config.dart';
 
 ///地址数据
 class Address {
-  static const String host = "https://api.github.com/";
+  static const String host = "http://10.0.2.2:5000/";
   static const String hostWeb = "https://github.com/";
   static const String downloadUrl = 'https://www.pgyer.com/GSYGithubApp';
   static const String graphicHost = 'https://ghchart.rshah.org/';
@@ -166,12 +166,18 @@ class Address {
 
   ///仓库路径下的内容 get
   static reposDataDir(reposOwner, repos, path, [branch = 'master']) {
-    return "${host}repos/$reposOwner/$repos/contents/$path" + ((branch == null) ? "" : ("?ref=" + branch));
+    return "${host}repos/$reposOwner/$repos/contents/$path" +
+        ((branch == null) ? "" : ("?ref=" + branch));
   }
 
   ///README 文件地址 get
   static readmeFile(reposNameFullName, curBranch) {
-    return host + "repos/" + reposNameFullName + "/" + "readme" + ((curBranch == null) ? "" : ("?ref=" + curBranch));
+    return host +
+        "repos/" +
+        reposNameFullName +
+        "/" +
+        "readme" +
+        ((curBranch == null) ? "" : ("?ref=" + curBranch));
   }
 
   ///我的用户信息 GET
@@ -247,7 +253,8 @@ class Address {
 
   ///通知 get
   static getNotifation(all, participating) {
-    if ((all == null && participating == null) || (all == false && participating == false)) {
+    if ((all == null && participating == null) ||
+        (all == false && participating == false)) {
       return "${host}notifications";
     }
     all ??= false;

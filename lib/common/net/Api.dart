@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:gsy_github_app_flutter/common/net/Code.dart';
 
 import 'dart:collection';
-
+import 'dart:convert';
 import 'package:gsy_github_app_flutter/common/config/Config.dart';
 import 'package:gsy_github_app_flutter/common/local/LocalStorage.dart';
 import 'package:gsy_github_app_flutter/common/net/ResultData.dart';
@@ -23,12 +23,15 @@ class HttpManager {
   ///[ params] 请求参数
   ///[ header] 外加头
   ///[ option] 配置
-  static netFetch(url, params, Map<String, String> header, Options option, {noTip = false}) async {
-
+  static netFetch(url, params, Map<String, String> header, Options option,
+      {noTip = false}) async {
     //没有网络
     var connectivityResult = await (new Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
-      return new ResultData(Code.errorHandleFunction(Code.NETWORK_ERROR, "", noTip), false, Code.NETWORK_ERROR);
+      return new ResultData(
+          Code.errorHandleFunction(Code.NETWORK_ERROR, "", noTip),
+          false,
+          Code.NETWORK_ERROR);
     }
 
     Map<String, String> headers = new HashMap();
@@ -48,13 +51,13 @@ class HttpManager {
 
     if (option != null) {
       option.headers = headers;
-    } else{
+    } else {
       option = new Options(method: "get");
       option.headers = headers;
     }
 
     ///超时
-    option.connectTimeout = 15000;
+    option.connectTimeout = 35000;
 
     Dio dio = new Dio();
     Response response;
@@ -74,7 +77,10 @@ class HttpManager {
         print('请求异常: ' + e.toString());
         print('请求异常url: ' + url);
       }
-      return new ResultData(Code.errorHandleFunction(errorResponse.statusCode, e.message, noTip), false, errorResponse.statusCode);
+      return new ResultData(
+          Code.errorHandleFunction(errorResponse.statusCode, e.message, noTip),
+          false,
+          errorResponse.statusCode);
     }
 
     if (Config.DEBUG) {
@@ -92,23 +98,36 @@ class HttpManager {
     }
 
     try {
-      if (option.contentType != null && option.contentType.primaryType == "text") {
+      if (option.contentType != null &&
+          option.contentType.primaryType == "text") {
         return new ResultData(response.data, true, Code.SUCCESS);
       } else {
         var responseJson = response.data;
-        if (response.statusCode == 201 && responseJson["token"] != null) {
-          optionParams["authorizationCode"] = 'token ' + responseJson["token"];
-          await LocalStorage.save(Config.TOKEN_KEY, optionParams["authorizationCode"]);
+        if (response.statusCode == 200 && responseJson["token"] != null) {
+          // 原有的
+//          optionParams["authorizationCode"] = 'token ' + responseJson["token"];
+          // gnucash  项目
+          var type = '"' + responseJson["token"] +  '":';
+          var bytes = utf8.encode(type);
+          var base64Str = base64.encode(bytes);
+          optionParams["authorizationCode"] = "Basic $base64Str";
+          await LocalStorage.save(
+              Config.TOKEN_KEY, optionParams["authorizationCode"]);
         }
       }
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return new ResultData(response.data, true, Code.SUCCESS, headers: response.headers);
+        return new ResultData(response.data, true, Code.SUCCESS,
+            headers: response.headers);
       }
     } catch (e) {
       print(e.toString() + url);
-      return new ResultData(response.data, false, response.statusCode, headers: response.headers);
+      return new ResultData(response.data, false, response.statusCode,
+          headers: response.headers);
     }
-    return new ResultData(Code.errorHandleFunction(response.statusCode, "", noTip), false, response.statusCode);
+    return new ResultData(
+        Code.errorHandleFunction(response.statusCode, "", noTip),
+        false,
+        response.statusCode);
   }
 
   ///清除授权

@@ -38,7 +38,7 @@ class UserDao {
     };
     HttpManager.clearAuthorization();
 
-    var res = await HttpManager.netFetch(Address.getAuthorization(), json.encode(requestParams), null, new Options(method: "post"));
+    var res = await HttpManager.netFetch(Address.getAuthorization(), null, null, new Options(method: "post"));
     var resultData = null;
     if (res != null && res.result) {
       await LocalStorage.save(Config.PW_KEY, password);
@@ -48,6 +48,7 @@ class UserDao {
         print(resultData.data);
         print(res.data.toString());
       }
+      resultData.data = User("", 2, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", true, "", "", "", "", "", "", "", 5, 5, 5, 5, DateTime.now(),  DateTime.now(), 5, 5, 5, 5, 5, false);
       store.dispatch(new UpdateUserAction(resultData.data));
     }
     return new DataResult(resultData, res.result);
