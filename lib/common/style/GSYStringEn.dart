@@ -278,4 +278,11 @@ class GSYStringEn extends GSYStringBase {
   String search_sort = "sort";
   @override
   String search_language = "language";
+
+  @override
+  String account_tab_children="children";
+  @override
+  String account_tab_tx="tx";
+  @override
+  String account_tab_path="path";
 }

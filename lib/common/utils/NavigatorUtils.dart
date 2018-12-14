@@ -16,8 +16,10 @@ import 'package:gsy_github_app_flutter/page/PhotoViewPage.dart';
 import 'package:gsy_github_app_flutter/page/PushDetailPage.dart';
 import 'package:gsy_github_app_flutter/page/ReleasePage.dart';
 import 'package:gsy_github_app_flutter/page/RepositoryDetailPage.dart';
+import 'package:gsy_github_app_flutter/page/AccountDetailPage.dart';
 import 'package:gsy_github_app_flutter/page/SearchPage.dart';
 import 'package:gsy_github_app_flutter/page/UserProfilePage.dart';
+
 /**
  * 导航栏
  * Created by guoshuyu
@@ -47,6 +49,11 @@ class NavigatorUtils {
   ///个人中心
   static goPerson(BuildContext context, String userName) {
     Navigator.push(context, new CupertinoPageRoute(builder: (context) => new PersonPage(userName)));
+  }
+
+  ///account详情
+  static Future<Null> goAccountDetail(BuildContext context, String guid) {
+    return Navigator.push(context, new CupertinoPageRoute(builder: (context) => new AccountDetailPage(guid)));
   }
 
   ///仓库详情
@@ -95,8 +102,7 @@ class NavigatorUtils {
   }
 
   ///文件代码详情
-  static gotoCodeDetailPage(BuildContext context,
-      {String title, String userName, String reposName, String path, String data, String branch, String htmlUrl}) {
+  static gotoCodeDetailPage(BuildContext context, {String title, String userName, String reposName, String path, String data, String branch, String htmlUrl}) {
     Navigator.push(
         context,
         new CupertinoPageRoute(
@@ -145,8 +151,7 @@ class NavigatorUtils {
   }
 
   ///文件代码详情Web
-  static gotoCodeDetailPageWeb(BuildContext context,
-      {String title, String userName, String reposName, String path, String data, String branch, String htmlUrl}) {
+  static gotoCodeDetailPageWeb(BuildContext context, {String title, String userName, String reposName, String path, String data, String branch, String htmlUrl}) {
     Navigator.push(
         context,
         new CupertinoPageRoute(
@@ -162,8 +167,7 @@ class NavigatorUtils {
   }
 
   ///根据平台跳转文件代码详情Web
-  static gotoCodeDetailPlatform(BuildContext context,
-      {String title, String userName, String reposName, String path, String data, String branch, String htmlUrl}) {
+  static gotoCodeDetailPlatform(BuildContext context, {String title, String userName, String reposName, String path, String data, String branch, String htmlUrl}) {
     /*if (Platform.isIOS) {
       NavigatorUtils.gotoCodeDetailPage(
         context,

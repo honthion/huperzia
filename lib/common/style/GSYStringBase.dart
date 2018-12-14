@@ -95,6 +95,7 @@ abstract class GSYStringBase {
   String load_more_text;
 
   String home_dynamic;
+  String home_gnucash;
 
   String home_trend;
   String home_my;
@@ -222,4 +223,12 @@ abstract class GSYStringBase {
   String search_type;
   String search_sort;
   String search_language;
+
+  String account_tab_children;
+  String account_tab_tx;
+  String account_tab_path;
+
+  String tx_edit_tx;
+  String tx_edit_tx_title_not_be_null;
+  String tx_edit_tx_content_not_be_null;
 }

@@ -278,4 +278,14 @@ class GSYStringZh extends GSYStringBase {
   String search_sort = "排序";
   @override
   String search_language = "语言";
+
+  @override
+  String account_tab_children="子列表";
+  @override
+  String account_tab_tx="交易";
+  @override
+  String account_tab_path="层级";
+
+  @override
+  String tx_edit_tx="编辑交易";
 }

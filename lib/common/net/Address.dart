@@ -13,6 +13,26 @@ class Address {
     return "${host}authorizations";
   }
 
+  ///我的用户信息 GET
+  static getMyUserInfo() {
+    return "${host}user";
+  }
+
+  ///仓release get
+  static getGnucashIndex() {
+    return "${host}index";
+  }
+
+  ///交易
+  static tx() {
+    return "${host}tx";
+  }
+
+  ///搜索交易
+  static searchTx(q) {
+    return "${host}tx?q=$q";
+  }
+
   ///搜索 get
   static search(q, sort, order, type, page, [pageSize = Config.PAGE_SIZE]) {
     if (type == 'user') {
@@ -166,23 +186,12 @@ class Address {
 
   ///仓库路径下的内容 get
   static reposDataDir(reposOwner, repos, path, [branch = 'master']) {
-    return "${host}repos/$reposOwner/$repos/contents/$path" +
-        ((branch == null) ? "" : ("?ref=" + branch));
+    return "${host}repos/$reposOwner/$repos/contents/$path" + ((branch == null) ? "" : ("?ref=" + branch));
   }
 
   ///README 文件地址 get
   static readmeFile(reposNameFullName, curBranch) {
-    return host +
-        "repos/" +
-        reposNameFullName +
-        "/" +
-        "readme" +
-        ((curBranch == null) ? "" : ("?ref=" + curBranch));
-  }
-
-  ///我的用户信息 GET
-  static getMyUserInfo() {
-    return "${host}user";
+    return host + "repos/" + reposNameFullName + "/" + "readme" + ((curBranch == null) ? "" : ("?ref=" + curBranch));
   }
 
   ///用户信息 get
@@ -253,8 +262,7 @@ class Address {
 
   ///通知 get
   static getNotifation(all, participating) {
-    if ((all == null && participating == null) ||
-        (all == false && participating == false)) {
+    if ((all == null && participating == null) || (all == false && participating == false)) {
       return "${host}notifications";
     }
     all ??= false;
