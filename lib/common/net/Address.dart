@@ -18,7 +18,7 @@ class Address {
     return "${host}user";
   }
 
-  ///仓release get
+  /// gnucash 首页 GET
   static getGnucashIndex() {
     return "${host}index";
   }

@@ -19,6 +19,7 @@ import 'package:gsy_github_app_flutter/page/RepositoryDetailPage.dart';
 import 'package:gsy_github_app_flutter/page/AccountDetailPage.dart';
 import 'package:gsy_github_app_flutter/page/SearchPage.dart';
 import 'package:gsy_github_app_flutter/page/UserProfilePage.dart';
+import 'package:gsy_github_app_flutter/page/AccountIndexPage.dart';
 
 /**
  * 导航栏
@@ -54,6 +55,10 @@ class NavigatorUtils {
   ///account详情
   static Future<Null> goAccountDetail(BuildContext context, String guid) {
     return Navigator.push(context, new CupertinoPageRoute(builder: (context) => new AccountDetailPage(guid)));
+  }
+  ///account详情
+  static Future<Null> goAccountIndex(BuildContext context) {
+    return Navigator.push(context, new CupertinoPageRoute(builder: (context) => new AccountIndexPage()));
   }
 
   ///仓库详情

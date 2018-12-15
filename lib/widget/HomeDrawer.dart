@@ -122,7 +122,7 @@ class HomeDrawer extends StatelessWidget {
                                 }
                                 CommonUtils.showLoadingDialog(context);
                                 IssueDao.createIssueDao(
-                                        "CarGuo", "GSYGithubAppFlutter", {"title": CommonUtils.getLocale(context).home_reply, "body": content})
+                                        "CarGuo", "HONTHION", {"title": CommonUtils.getLocale(context).home_reply, "body": content})
                                     .then((result) {
                                   Navigator.pop(context);
                                   Navigator.pop(context);

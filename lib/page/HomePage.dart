@@ -5,10 +5,9 @@ import 'package:gsy_github_app_flutter/common/localization/DefaultLocalizations.
 import 'package:gsy_github_app_flutter/common/style/GSYStyle.dart';
 import 'package:gsy_github_app_flutter/common/utils/CommonUtils.dart';
 import 'package:gsy_github_app_flutter/common/utils/NavigatorUtils.dart';
+import 'package:gsy_github_app_flutter/page/AccountIndexPage.dart';
 import 'package:gsy_github_app_flutter/page/DynamicPage.dart';
 import 'package:gsy_github_app_flutter/page/MyPage.dart';
-import 'package:gsy_github_app_flutter/page/GnucashPage.dart';
-import 'package:gsy_github_app_flutter/page/TrendPage.dart';
 import 'package:gsy_github_app_flutter/widget/GSYTabBarWidget.dart';
 import 'package:gsy_github_app_flutter/widget/GSYTitleBar.dart';
 import 'package:gsy_github_app_flutter/widget/HomeDrawer.dart';
@@ -51,8 +50,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> tabs = [
-      _renderTab(GSYICons.MAIN_DT, CommonUtils.getLocale(context).home_dynamic),
       _renderTab(GSYICons.MAIN_GNUCASH, CommonUtils.getLocale(context).home_gnucash),
+      _renderTab(GSYICons.MAIN_DT, CommonUtils.getLocale(context).home_dynamic),
       _renderTab(GSYICons.MAIN_MY, CommonUtils.getLocale(context).home_my),
     ];
     return WillPopScope(
@@ -64,8 +63,8 @@ class HomePage extends StatelessWidget {
         type: GSYTabBarWidget.BOTTOM_TAB,
         tabItems: tabs,
         tabViews: [
+          new AccountIndexPage(),
           new DynamicPage(),
-          new GnucashPage(),
           new MyPage(),
         ],
         backgroundColor: GSYColors.primarySwatch,

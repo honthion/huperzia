@@ -34,6 +34,7 @@ class FlutterReduxApp extends StatelessWidget {
         userInfo: User.empty(),
         eventList: new List(),
         trendList: new List(),
+        accountList: new List(),
         themeData: new ThemeData(
           primarySwatch: GSYColors.primarySwatch,
         ),

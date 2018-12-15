@@ -6,10 +6,10 @@ import 'package:gsy_github_app_flutter/common/style/GSYStringBase.dart';
  */
 class GSYStringZh extends GSYStringBase {
   @override
-  String welcomeMessage = "Welcome To Flutter";
+  String welcomeMessage = "Welcome To Gnucash";
 
   @override
-  String app_name = "GSYGithubAppFlutter";
+  String app_name = "草木三金 Gnucash";
 
   @override
   String app_ok = "确定";
@@ -279,6 +279,8 @@ class GSYStringZh extends GSYStringBase {
   @override
   String search_language = "语言";
 
+  @override
+  String home_gnucash="账务";
   @override
   String account_tab_children="子列表";
   @override

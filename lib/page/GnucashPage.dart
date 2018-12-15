@@ -34,7 +34,7 @@ class _GnucashPageState extends State<GnucashPage> with AutomaticKeepAliveClient
     }
     isLoading = true;
     page = 1;
-    await AccountDao.getIndexDao(_getStore());
+    await AccountDao.getGnucashIndexDao(_getStore());
     setState(() {
       pullLoadWidgetControl.needLoadMore = false;
     });

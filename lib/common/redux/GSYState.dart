@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gsy_github_app_flutter/common/model/Event.dart';
 import 'package:gsy_github_app_flutter/common/model/TrendingRepoModel.dart';
 import 'package:gsy_github_app_flutter/common/model/User.dart';
+import 'package:gsy_github_app_flutter/common/model/Account.dart';
 import 'package:gsy_github_app_flutter/common/redux/UserRedux.dart';
 import 'package:gsy_github_app_flutter/common/redux/EventRedux.dart';
 import 'package:gsy_github_app_flutter/common/redux/TrendRedux.dart';
 import 'package:gsy_github_app_flutter/common/redux/ThemeRedux.dart';
 import 'package:gsy_github_app_flutter/common/redux/LocaleRedux.dart';
+import 'package:gsy_github_app_flutter/common/redux/AccountRedux.dart';
 
 /**
  * Redux全局State
@@ -25,6 +27,9 @@ class GSYState {
   ///用户接受到的事件列表
   List<TrendingRepoModel> trendList = new List();
 
+  ///用户接受到的事件列表
+  List<Account> accountList = new List();
+
   ///主题数据
   ThemeData themeData;
 
@@ -35,7 +40,7 @@ class GSYState {
   Locale platformLocale;
 
   ///构造方法
-  GSYState({this.userInfo, this.eventList, this.trendList, this.themeData, this.locale});
+  GSYState({this.userInfo, this.eventList, this.trendList, this.accountList, this.themeData, this.locale});
 }
 
 ///创建 Reducer
@@ -51,6 +56,9 @@ GSYState appReducer(GSYState state, action) {
 
     ///通过 TrendReducer 将 GSYState 内的 trendList 和 action 关联在一起
     trendList: TrendReducer(state.trendList, action),
+
+    ///通过 TrendReducer 将 GSYState 内的 trendList 和 action 关联在一起
+    accountList: AccountReducer(state.accountList, action),
 
     ///通过 ThemeDataReducer 将 GSYState 内的 themeData 和 action 关联在一起
     themeData: ThemeDataReducer(state.themeData, action),
