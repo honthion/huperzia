@@ -23,14 +23,14 @@ class Address {
     return "${host}index";
   }
 
-  ///交易
-  static tx() {
-    return "${host}tx";
+  ///交易列表
+  static searchTx(guid) {
+    return "${host}$guid/transactions";
   }
 
-  ///搜索交易
-  static searchTx(q) {
-    return "${host}tx?q=$q";
+  ///子account
+  static accountChild(guid) {
+    return "${host}$guid/children";
   }
 
   ///搜索 get
@@ -292,9 +292,9 @@ class Address {
   static getPageParams(tab, page, [pageSize = Config.PAGE_SIZE]) {
     if (page != null) {
       if (pageSize != null) {
-        return "${tab}page=$page&per_page=$pageSize";
+        return "${tab}page_num=$page&page_size=$pageSize";
       } else {
-        return "${tab}page=$page";
+        return "${tab}page_num=$page";
       }
     } else {
       return "";

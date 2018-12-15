@@ -23,7 +23,7 @@ class _GnucashPageState extends State<GnucashPage> with AutomaticKeepAliveClient
   _renderItem(e) {
     AccountViewModel accountViewModel = AccountViewModel.fromTrendMap(e);
     return new AccountItem(accountViewModel, onPressed: () {
-      NavigatorUtils.goAccountDetail(context, accountViewModel.guid);
+      NavigatorUtils.goAccountDetail(context, accountViewModel.guid, accountViewModel.name);
     });
   }
 

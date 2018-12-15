@@ -4,6 +4,7 @@ import 'package:gsy_github_app_flutter/common/style/GSYStyle.dart';
 import 'package:gsy_github_app_flutter/common/utils/CommonUtils.dart';
 import 'package:gsy_github_app_flutter/widget/GSYCardItem.dart';
 import 'package:gsy_github_app_flutter/widget/GSYMarkdownWidget.dart';
+import 'package:intl/intl.dart';
 
 /**
  * 交易相关item
@@ -25,12 +26,14 @@ class TxItem extends StatelessWidget {
 
   TxItem(this.txItemViewModel, this.onPressed, this.onLongPress, this.hideBottom, this.limitComment);
 
+  final formatCurrency = new NumberFormat("#,##0.00", "zh_CN");
+
   ///描述内容
   _renderDesText() {
     return (limitComment)
         ? new Container(
             child: new Text(
-              txItemViewModel.description,
+              "" + txItemViewModel.description,
               style: GSYConstant.smallSubText,
               maxLines: limitComment ? 2 : 1000,
             ),
@@ -38,6 +41,19 @@ class TxItem extends StatelessWidget {
             alignment: Alignment.topLeft,
           )
         : GSYMarkdownWidget(markdownData: txItemViewModel.description);
+  }
+
+  ///描述内容
+  _renderPathText() {
+    return new Container(
+            child: new Text(
+              "" + txItemViewModel.namePath,
+              style: GSYConstant.smallSubText,
+              maxLines: limitComment ? 2 : 1000,
+            ),
+            margin: new EdgeInsets.only(top: 6.0, bottom: 2.0),
+            alignment: Alignment.topRight,
+          );
   }
 
   @override
@@ -55,8 +71,9 @@ class TxItem extends StatelessWidget {
                 children: <Widget>[
                   new Row(
                     children: <Widget>[
-                      ///用户名
-                      new Expanded(child: new Text(txItemViewModel.name, style: GSYConstant.smallTextBold)),
+                      ///金额
+                      new Expanded(child: new Text(" | ${formatCurrency.format(txItemViewModel.quantityNum)}", style: GSYConstant.smallTextBold)),
+                      // 日期
                       new Text(
                         txItemViewModel.enterDate,
                         style: GSYConstant.smallSubText,
@@ -66,8 +83,11 @@ class TxItem extends StatelessWidget {
                     ],
                   ),
 
-                  ///评论内容
+                  ///备注
                   _renderDesText(),
+
+                  ///评论内容
+                  _renderPathText(),
                 ],
               ),
             ),
@@ -83,7 +103,7 @@ class TxItemViewModel {
   String name = "---";
   String enterDate = "---";
   String description = "---";
-  String quantityNum = "---";
+  double quantityNum = 0.0;
   String namePath = "---";
   String accountGuid = "---";
 
@@ -94,7 +114,7 @@ class TxItemViewModel {
     guid = txMap.guid;
     name = txMap.name;
     description = txMap.description;
-    quantityNum = txMap.quantityNum.toString();
+    quantityNum = txMap.quantityNum;
     namePath = txMap.namePath;
     accountGuid = txMap.accountGuid;
   }

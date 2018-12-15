@@ -53,8 +53,8 @@ class NavigatorUtils {
   }
 
   ///account详情
-  static Future<Null> goAccountDetail(BuildContext context, String guid) {
-    return Navigator.push(context, new CupertinoPageRoute(builder: (context) => new AccountDetailPage(guid)));
+  static Future<Null> goAccountDetail(BuildContext context, String guid, String name) {
+    return Navigator.push(context, new CupertinoPageRoute(builder: (context) => new AccountDetailPage(guid, name)));
   }
   ///account详情
   static Future<Null> goAccountIndex(BuildContext context) {

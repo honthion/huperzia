@@ -70,7 +70,7 @@ class _AccountIndexPageState extends State<AccountIndexPage> with AutomaticKeepA
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    ReposDao.getNewsVersion(context, false);
+//    ReposDao.getNewsVersion(context, false);
   }
 
   @override

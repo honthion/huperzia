@@ -10,7 +10,7 @@ class Tx {
   DateTime enterDate;
   String description;
   @JsonKey(name: "quantity_num")
-  String quantityNum;
+  double quantityNum;
   @JsonKey(name: "name_path")
   String namePath;
   @JsonKey(name: "account_guid")

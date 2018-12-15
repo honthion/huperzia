@@ -220,7 +220,7 @@ class GSYICons {
   static const IconData ACCOUNT_BALANCE = const IconData(0xe84f, fontFamily: GSYICons.FONT_FAMILY);
 
   static const IconData MAIN_DT = const IconData(0xe684, fontFamily: GSYICons.FONT_FAMILY);
-  static const IconData MAIN_GNUCASH = const IconData(0xe684, fontFamily: GSYICons.FONT_FAMILY);
+  static const IconData MAIN_GNUCASH = const IconData(0xe60e, fontFamily: GSYICons.FONT_FAMILY);
   static const IconData MAIN_QS = const IconData(0xe818, fontFamily: GSYICons.FONT_FAMILY);
   static const IconData MAIN_MY = const IconData(0xe6d0, fontFamily: GSYICons.FONT_FAMILY);
   static const IconData MAIN_SEARCH = const IconData(0xe61c, fontFamily: GSYICons.FONT_FAMILY);

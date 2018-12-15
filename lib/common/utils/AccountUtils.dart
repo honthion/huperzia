@@ -124,55 +124,10 @@ class AccountUtils {
   }
 
   ///跳转
-  static ActionUtils(BuildContext context, Account event1, currentRepository) {
-    Event event;
-    if (event.repo == null) {
-      NavigatorUtils.goPerson(context, event.actor.login);
+  static ActionUtils(BuildContext context, Account account, currentRepository) {
+    if (account == null || account.guid == null) {
       return;
     }
-    String owner = event.repo.name.split("/")[0];
-    String repositoryName = event.repo.name.split("/")[1];
-    String fullName = owner + '/' + repositoryName;
-    switch (event.type) {
-      case 'ForkEvent':
-        String forkName = event.actor.login + "/" + repositoryName;
-        if (forkName.toLowerCase() == currentRepository.toLowerCase()) {
-          return;
-        }
-        NavigatorUtils.goReposDetail(context, event.actor.login, repositoryName);
-        break;
-      case 'PushEvent':
-        if (event.payload.commits == null) {
-          if (fullName.toLowerCase() == currentRepository.toLowerCase()) {
-            return;
-          }
-          NavigatorUtils.goReposDetail(context, owner, repositoryName);
-        } else if (event.payload.commits.length == 1) {
-          NavigatorUtils.goPushDetailPage(context, owner, repositoryName, event.payload.commits[0].sha, true);
-        } else {
-          List<String> list = new List();
-          for (int i = 0; i < event.payload.commits.length; i++) {
-            list.add(event.payload.commits[i].message + " " + event.payload.commits[i].sha.substring(0, 4));
-          }
-          CommonUtils.showCommitOptionDialog(context, list, (index) {
-            NavigatorUtils.goPushDetailPage(context, owner, repositoryName, event.payload.commits[index].sha, true);
-          });
-        }
-        break;
-      case 'ReleaseEvent':
-        String url = event.payload.release.tarballUrl;
-        CommonUtils.launchWebView(context, repositoryName, url);
-        break;
-      case 'IssueCommentEvent':
-      case 'IssuesEvent':
-        NavigatorUtils.goIssueDetail(context, owner, repositoryName, event.payload.issue.number.toString(), needRightLocalIcon: true);
-        break;
-      default:
-        if (fullName.toLowerCase() == currentRepository.toLowerCase()) {
-          return;
-        }
-        NavigatorUtils.goReposDetail(context, owner, repositoryName);
-        break;
-    }
+    NavigatorUtils.goAccountDetail(context, account.guid, account.name);
   }
 }

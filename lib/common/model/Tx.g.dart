@@ -14,7 +14,7 @@ Tx _$TxFromJson(Map<String, dynamic> json) {
           ? null
           : DateTime.parse(json['enter_date'] as String),
       json['description'] as String,
-      json['quantity_num'] as String,
+      (json['quantity_num'] as num)?.toDouble(),
       json['name_path'] as String,
       json['account_guid'] as String);
 }

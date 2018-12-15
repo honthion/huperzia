@@ -7,23 +7,26 @@ import 'package:gsy_github_app_flutter/widget/GSYCommonOptionWidget.dart';
 import 'package:gsy_github_app_flutter/widget/GSYTabBarWidget.dart';
 import 'package:gsy_github_app_flutter/widget/ReposHeaderItem.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:gsy_github_app_flutter/widget/GSYTitleBar.dart';
 
 /**
  * Account详情
  */
 class AccountDetailPage extends StatefulWidget {
   final String guid;
+  final String name;
 
-  AccountDetailPage(this.guid);
+  AccountDetailPage(this.guid, this.name);
 
   @override
-  _AccountDetailPageState createState() => _AccountDetailPageState(guid);
+  _AccountDetailPageState createState() => _AccountDetailPageState(guid, name);
 }
 
 class _AccountDetailPageState extends State<AccountDetailPage> {
   ReposHeaderViewModel reposHeaderViewModel = new ReposHeaderViewModel();
 
   final String guid;
+  final String name;
 
   final TarWidgetControl tarBarControl = new TarWidgetControl();
 
@@ -33,7 +36,7 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
 
   final OptionControl titleOptionControl = new OptionControl();
 
-  _AccountDetailPageState(this.guid);
+  _AccountDetailPageState(this.guid, this.name);
 
   _getReposStatus() async {
     setState(() {});
@@ -92,6 +95,10 @@ class _AccountDetailPageState extends State<AccountDetailPage> {
             topPageControl: topPageControl,
             backgroundColor: GSYColors.primarySwatch,
             indicatorColor: Color(GSYColors.white),
+//            title: new GSYTitleBar(
+//              name,
+//              rightWidget: widget,
+//            ),
             onPageChanged: (index) {
               accountDetailModel.setCurrentIndex(index);
             },
