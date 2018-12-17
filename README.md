@@ -1,2 +1,2 @@
-# huperzia
+# setaria
 gnucash项目App
